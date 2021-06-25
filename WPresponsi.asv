@@ -1,0 +1,23 @@
+opts = detectImportOptions('Real estate valuation data set.xlsx');
+opts.SelectedVariableNames = [3 4 5 8];
+data = readmatrix('Real estate valuation data set.xlsx',opts);
+
+k = [0, 0, 1, 0];
+w = [3, 5, 4, 1];
+[m, n] = size([data]);
+w =w./sum(w);
+
+for j=1:4,
+    if k(j) == 0, w(j)=-1*w(j);
+    end;
+end;
+
+for i=1:50,
+    S(i)=prod(data(i,:).^w);
+end;
+
+V = S/sum(S);
+
+
+disp (m);
+disp (n);
